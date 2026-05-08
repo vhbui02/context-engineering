@@ -1,0 +1,20 @@
+---
+- name: Extract Python Dependency Injector documentation
+  ansible.builtin.include_tasks: _extract.yml
+  vars:
+    repo_url: git@github.com:ets-labs/python-dependency-injector.git
+    rsync_steps:
+      - src: docs/
+        dest: docs/
+        opts:
+          - "--exclude=_static"
+          - "--exclude=/main/changelog.rst"
+          - "--include=*/"
+          - "--include=*.rst"
+          - "--exclude=*"
+      - src: examples/
+        dest: examples/
+        opts:
+          - "--include=*/"
+          - "--include=*.py"
+          - "--exclude=*"

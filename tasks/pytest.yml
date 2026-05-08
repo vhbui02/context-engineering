@@ -1,0 +1,15 @@
+---
+- name: Extract Pytest documentation
+  ansible.builtin.include_tasks: _extract.yml
+  vars:
+    repo_url: git@github.com:pytest-dev/pytest.git
+    rsync_steps:
+      - src: doc/en/
+        dest: docs/
+        opts:
+          - "--exclude=/announce"
+          - "--exclude=changelog.rst"
+          - "--include=*/"
+          - "--include=*.rst"
+          - "--include=/example"
+          - "--exclude=*"

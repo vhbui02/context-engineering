@@ -1,0 +1,13 @@
+---
+- name: Extract OWASP Cheatsheet documentation
+  ansible.builtin.include_tasks: _extract.yml
+  vars:
+    _name: owasp-cheatsheet
+    repo_url: git@github.com:OWASP/CheatSheetSeries.git
+    rsync_steps:
+      - src: cheatsheets/
+        dest: ""
+        opts:
+          - "--include=*/"
+          - "--include=*.md"
+          - "--exclude=*"

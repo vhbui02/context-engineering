@@ -1,0 +1,12 @@
+---
+- name: Extract Pydantic documentation
+  ansible.builtin.include_tasks: _extract.yml
+  vars:
+    repo_url: git@github.com:pydantic/pydantic.git
+    rsync_steps:
+      - src: docs/
+        dest: docs/
+        opts:
+          - "--include=*/"
+          - "--include=*.md"
+          - "--exclude=*"

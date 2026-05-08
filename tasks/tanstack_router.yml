@@ -1,0 +1,14 @@
+---
+- name: Extract TanStack Router documentation
+  ansible.builtin.include_tasks: _extract.yml
+  vars:
+    _name: tanstack-router
+    repo_url: git@github.com:TanStack/router.git
+    rsync_steps:
+      - src: docs/router/
+        dest: docs/
+        opts:
+          - "--exclude=assets"
+          - "--include=*/"
+          - "--include=*.md"
+          - "--exclude=*"

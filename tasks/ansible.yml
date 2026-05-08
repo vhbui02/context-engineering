@@ -1,0 +1,16 @@
+---
+- name: Extract Ansible documentation
+  ansible.builtin.include_tasks: _extract.yml
+  vars:
+    repo_url: git@github.com:ansible/ansible-documentation.git
+    rsync_steps:
+      - src: docs/docsite/rst/
+        dest: docs/docsite/rst/
+        opts:
+          - "--exclude=/404.rst"
+          - "--exclude=/roadmap"
+          - "--exclude=/porting_guides"
+          - "--exclude=*changelog.rst"
+          - "--include=*/"
+          - "--include=*.rst"
+          - "--exclude=*"

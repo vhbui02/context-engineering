@@ -1,0 +1,69 @@
+---
+- name: Extract LLM-feedable knowledge from third-party repositories
+  hosts: localhost
+  connection: local # gather facts from the local machine and overwrite the remote node's facts
+  gather_facts: true
+
+  tasks:
+    - import_tasks: tasks/ansible.yml # tested
+      tags: ansible
+
+    - import_tasks: tasks/bp_react.yml # tested
+      tags: bp_react
+
+    - import_tasks: tasks/jinja2.yml # tested
+      tags: jinja2
+
+    - import_tasks: tasks/msgspec.yml # tested
+      tags: msgspec
+
+    - import_tasks: tasks/owasp_cheatsheet.yml # tested
+      tags: owasp-cheatsheet
+
+    - import_tasks: tasks/playwright.yml # tested
+      tags: playwright
+
+    - import_tasks: tasks/pydantic.yml # tested
+      tags: pydantic
+
+    - import_tasks: tasks/pytest.yml # tested
+      tags: pytest
+
+    - import_tasks: tasks/python_di.yml # tested
+      tags: python_di
+
+    - import_tasks: tasks/python_guide.yml # tested
+      tags: python_guide
+
+    - import_tasks: tasks/react_testing_library.yml # tested
+      tags: react_testing_library
+
+    - import_tasks: tasks/rclone.yml # tested
+      tags: rclone
+
+    - import_tasks: tasks/restic.yml # tested
+      tags: restic
+
+    - import_tasks: tasks/shadcn.yml # tested
+      tags: shadcn
+
+    - import_tasks: tasks/sqlalchemy.yml # tested
+      tags: sqlalchemy
+
+    - import_tasks: tasks/tanstack_form.yml # tested
+      tags: tanstack_form
+
+    - import_tasks: tasks/tanstack_query.yml # tested
+      tags: tanstack_query
+
+    - import_tasks: tasks/tanstack_router.yml # tested
+      tags: tanstack_router
+
+    - import_tasks: tasks/typescript_cheatsheets.yml # tested
+      tags: typescript_cheatsheets
+
+    - import_tasks: tasks/vagrant.yml # tested
+      tags: vagrant
+
+    - import_tasks: tasks/vitest.yml # tested
+      tags: vitest

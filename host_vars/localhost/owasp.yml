@@ -1,0 +1,462 @@
+---
+owasp_cheatsheets:
+  - src: Authorization_Cheat_Sheet.md
+    description: "This guide outlines principles for designing robust control systems to restrict users to authorized
+      functions. Use when reviewing backend logic to ensure least privilege and deny-by-default."
+
+  - src: Abuse_Case_Cheat_Sheet.md
+    description: "This document provides a framework for creating abuse cases to anticipate malicious uses of software. Use
+      when reviewing security requirements that translate threats into actionable scenarios."
+
+  - src: AJAX_Security_Cheat_Sheet.md
+    description: "This cheatsheet details security best practices for AJAX applications concerning DOM manipulation and
+      validation. Use when reviewing frontend logic to ensure safe handling of untrusted API data."
+
+  - src: AI_Agent_Security_Cheat_Sheet.md
+    description: "This guide provides best practices for securing autonomous AI agents against threats like prompt
+      injection. Use when reviewing backend systems to enforce least privilege on LLM-powered agents."
+
+  - src: Attack_Surface_Analysis_Cheat_Sheet.md
+    description: "This article describes a methodology for mapping an application's attack surface to understand risk
+      exposure. Use when reviewing entry points to prioritize testing and defense-in-depth."
+
+  - src: Authentication_Cheat_Sheet.md
+    description: "This guide covers best practices for verifying user identities, managing passwords, and configuring secure
+      logins. Use when reviewing authentication systems to ensure alignment with standards like NIST SP800-63B."
+
+  - src: Authorization_Testing_Automation_Cheat_Sheet.md
+    description: "This document proposes a strategy for automating the evaluation of authorization matrices using
+      integration tests. Use when reviewing pipelines to ensure changes do not violate policies."
+
+  - src: Automotive_Security_Cheat_Sheet.md
+    description: "This sheet outlines common security vulnerabilities in automotive systems like weak CAN bus protocols and
+      OTA updates. Use when reviewing infrastructure for connected vehicles to mitigate risks."
+    skip: true
+
+  - src: Bean_Validation_Cheat_Sheet.md
+    description: "This guide explains how to use Java Bean Validation to implement centralized input validation constraints.
+      Use when reviewing backend Java apps to enforce strict data validation."
+    skip: true
+
+  - src: Browser_Extension_Vulnerabilities_Cheat_Sheet.md
+    description: "This cheatsheet highlights common security flaws in browser extensions, including permissions overreach
+      and data leakage. Use when reviewing extensions to ensure adherence to Least Privilege."
+
+  - src: C-Based_Toolchain_Hardening_Cheat_Sheet.md
+    description: "This article provides prescriptive guidance for configuring C/C++ toolchains to produce secure
+      executables. Use when reviewing build environments to ensure compilers enforce security mitigations."
+
+  - src: CI_CD_Security_Cheat_Sheet.md
+    description: "This guide details best practices for securing pipelines against supply chain attacks and poisoned
+      execution. Use when reviewing automation servers to safeguard the delivery lifecycle."
+
+  - src: Choosing_and_Using_Security_Questions_Cheat_Sheet.md
+    description: "This document explains the historical context and inherent weaknesses of using security questions for
+      account recovery. Use when reviewing legacy authentication migration to stronger methods."
+
+  - src: Clickjacking_Defense_Cheat_Sheet.md
+    description: "This cheatsheet provides technical mechanisms like CSP frame-ancestors and X-Frame-Options to prevent UI
+      redress attacks. Use when reviewing HTTP headers to ensure safe embedding."
+
+  - src: Content_Security_Policy_Cheat_Sheet.md
+    description: "This article explains how to implement a Content Security Policy (CSP) to restrict script execution. Use
+      when reviewing HTTP headers to mitigate the impact of Cross-Site Scripting and framing."
+
+  - src: Cookie_Theft_Mitigation_Cheat_Sheet.md
+    description: "This guide outlines strategies for detecting and mitigating session hijacking caused by stolen valid
+      session cookies. Use when reviewing backend session management to add anomaly detection."
+
+  - src: Credential_Stuffing_Prevention_Cheat_Sheet.md
+    description: "This cheatsheet covers multi-layered defenses against authentication attacks leveraging stolen
+      credentials. Use when reviewing login endpoints to apply mitigations like MFA and rate limiting."
+
+  - src: Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.md
+    description: "This document provides comprehensive strategies for preventing CSRF attacks via synchronizer tokens and
+      SameSite attributes. Use when reviewing state-changing requests to block unauthorized cross-site actions."
+
+  - src: Cross_Site_Scripting_Prevention_Cheat_Sheet.md
+    description: "This essential guide details defensive techniques, primarily context-aware output encoding, to prevent
+      XSS. Use when reviewing rendering logic to guarantee untrusted data is treated as text."
+
+  - src: Cryptographic_Storage_Cheat_Sheet.md
+    description: "This article provides architectural guidance for securely encrypting data at rest using modern standards.
+      Use when reviewing backend databases to select appropriate algorithms and cipher modes."
+
+  - src: DOM_Clobbering_Prevention_Cheat_Sheet.md
+    description: "This guide explains DOM Clobbering and provides secure coding patterns to prevent injected HTML elements
+      from overshadowing global variables. Use when reviewing frontend logic to ensure safe property access."
+
+  - src: DOM_based_XSS_Prevention_Cheat_Sheet.md
+    description: "This cheatsheet outlines JavaScript encoding rules to prevent DOM-based XSS when inserting untrusted data.
+      Use when reviewing frontend rendering to ensure data is escaped before assignment to HTML sinks."
+
+  - src: Database_Security_Cheat_Sheet.md
+    description: "This cheat sheet provides guidance for securely configuring relational databases via network isolation and
+      access controls. Use when reviewing backend/infrastructure to minimize attack surfaces and ensure secure data
+      layer communication."
+
+  - src: Denial_of_Service_Cheat_Sheet.md
+    description: "This document outlines a methodology for analyzing and defending against Denial of Service attacks. Use
+      when reviewing infrastructure scaling and backend processing limits to preserve system availability."
+
+  - src: Dependency_Graph_SBOM_Cheat_Sheet.md
+    description: "This guide provides best practices for generating, signing, and utilizing Software Bill of Materials
+      (SBOMs). Use when reviewing CI/CD pipelines to track dependencies and automate vulnerability enrichment."
+
+  - src: Deserialization_Cheat_Sheet.md
+    description: "This article offers guidance for preventing vulnerabilities when reconstructing objects from untrusted
+      serialized data. Use when reviewing backend parsing logic to prevent object injection via formats like JSON."
+
+  - src: Django_REST_Framework_Cheat_Sheet.md
+    description: "This cheat sheet provides security configurations specific to building APIs with the Django REST Framework
+      (DRF). Use when reviewing backend endpoints to ensure secure defaults for auth and throttling."
+    skip: true
+
+  - src: Django_Security_Cheat_Sheet.md
+    description: "This guide details the built-in security features of the Django framework and how to configure them
+      securely. Use when reviewing backend apps to ensure proper handling of auth and protection against web flaws."
+    skip: true
+
+  - src: Docker_Security_Cheat_Sheet.md
+    description: "This cheat sheet provides best practices for securing Docker containers, focusing on kernel hygiene and
+      socket protection. Use when reviewing container runtimes to prevent privilege escalation and escapes."
+
+  - src: DotNet_Security_Cheat_Sheet.md
+    description: "This resource offers targeted security guidance for the .NET framework, covering session management,
+      authorization, and secure cryptography. Use when reviewing backend apps to utilize native controls."
+    skip: true
+
+  - src: Drone_Security_Cheat_Sheet.md
+    description: "This guide explores vulnerable endpoints in drone systems, including communication data-links and
+      companion computers. Use when reviewing aerial systems infrastructure to implement encryption."
+    skip: true
+
+  - src: Error_Handling_Cheat_Sheet.md
+    description: "This article demonstrates how to implement secure, centralized error handling to prevent the leakage of
+      technical details. Use when reviewing runtime behavior to ensure exceptions return generic responses."
+
+  - src: File_Upload_Cheat_Sheet.md
+    description: "This cheat sheet provides critical controls for secure file upload functionality, including extension
+      allowlisting and storage isolation. Use when reviewing backend logic to defend against malicious payloads."
+
+  - src: Forgot_Password_Cheat_Sheet.md
+    description: "This document outlines secure practices for implementing password reset functionalities to prevent account
+      enumeration and unauthorized access. Use when reviewing recovery flows to ensure secure tokens."
+
+  - src: GraphQL_Cheat_Sheet.md
+    description: "This guide addresses security considerations for GraphQL APIs, including input validation and query cost
+      limitations. Use when reviewing backend endpoints to prevent injection attacks and insecure defaults."
+
+  - src: HTML5_Security_Cheat_Sheet.md
+    description: "This cheat sheet serves as a guide for implementing HTML5 features securely, focusing on CORS and Web
+      Messaging APIs. Use when reviewing frontend architecture to ensure strict origin validation."
+
+  - src: HTTP_Headers_Cheat_Sheet.md
+    description: "This comprehensive cheat sheet reviews critical security-related HTTP response headers and their
+      recommended configurations. Use when reviewing routing to instruct browsers to enforce protections."
+
+  - src: HTTP_Strict_Transport_Security_Cheat_Sheet.md
+    description: "This document explains the usage and benefits of the HTTP Strict Transport Security (HSTS) response header
+      in forcing secure connections. Use when reviewing infrastructure to protect from MITM."
+
+  - src: Infrastructure_as_Code_Security_Cheat_Sheet.md
+    description: "This guide outlines security best practices for developing and distributing Infrastructure as Code (IaC),
+      including secret management. Use when reviewing provisioning tools to detect risks early."
+
+  - src: Injection_Prevention_Cheat_Sheet.md
+    description: "This foundational article provides actionable guidance for preventing injection flaws across various query
+      languages and OS commands. Use when reviewing backend data-access layers."
+
+  - src: Injection_Prevention_in_Java_Cheat_Sheet.md
+    description: "This guide focuses specifically on preventing injection vulnerabilities within Java applications, covering
+      SQL and JPA techniques. Use when reviewing backend Java data-access code to properly leverage framework-specific
+      sanitization controls."
+    skip: true
+
+  - src: Input_Validation_Cheat_Sheet.md
+    description: "This cheat sheet provides strategies for implementing strict, allowlist-based syntactic and semantic input
+      validation. Use when reviewing frontend/backend endpoints to process untrusted data securely and mitigate logic
+      attacks."
+
+  - src: Insecure_Direct_Object_Reference_Prevention_Cheat_Sheet.md
+    description: "This document explains IDOR vulnerabilities and the necessity of strict access control checks when
+      resolving objects based on user-supplied identifiers. Use when reviewing backend APIs to ensure that users are
+      contextually authorized to access requested resources."
+
+  - src: JAAS_Cheat_Sheet.md
+    description: "This guide explains the Java Authentication and Authorization Service (JAAS) lifecycle and how to securely
+      configure its LoginModules. Use when reviewing backend Java enterprise applications to manage user identity and
+      credentials through standard frameworks."
+    skip: true
+
+  - src: JSON_Web_Token_for_Java_Cheat_Sheet.md
+    description: "This article provides tips to prevent common security issues when generating and validating JSON Web
+      Tokens (JWT) using Java libraries. Use when reviewing backend stateless authentication to protect against
+      algorithm tampering and insecure storage practices."
+    skip: true
+
+  - src: Java_Security_Cheat_Sheet.md
+    description: "This comprehensive guide offers specific security tips for Java applications, addressing issues like
+      secure deserialization and proper framework utilization. Use when reviewing backend Java software."
+    skip: true
+
+  - src: Key_Management_Cheat_Sheet.md
+    description: "This cheat sheet provides developers with guidance on implementing secure lifecycle management, storage,
+      and selection of cryptographic keys. Use when reviewing backend cryptography."
+
+  - src: Kubernetes_Security_Cheat_Sheet.md
+    description: "This document offers a starting point for securing a Kubernetes cluster, covering host hardening,
+      component protection, and access control. Use when reviewing infrastructure orchestration."
+    skip: true
+
+  - src: LDAP_Injection_Prevention_Cheat_Sheet.md
+    description: "This guide provides actionable guidance for preventing LDAP injection attacks by utilizing proper encoding
+      functions and parameterized query interfaces. Use when reviewing LDAP interactions."
+
+  - src: LLM_Prompt_Injection_Prevention_Cheat_Sheet.md
+    description: "This cheat sheet explores prompt injection vulnerabilities in Large Language Models and details strategies
+      for validating inputs. Use when reviewing backend integration with LLMs to defend against bypasses."
+
+  - src: Laravel_Cheat_Sheet.md
+    description: "This cheat sheet provides specific security tips for developers building applications with the Laravel PHP
+      framework. Use when reviewing PHP projects to ensure built-in security features are enabled."
+    skip: true
+
+  - src: Legacy_Application_Management_Cheat_Sheet.md
+    description: "This guide offers practical suggestions for hardening outdated, unsupported applications when replacement
+      is not feasible. Use when reviewing infrastructure to implement controls and isolation."
+
+  - src: Logging_Cheat_Sheet.md
+    description: "This document provides guidance on building robust application logging mechanisms designed to capture
+      actionable security events. Use when reviewing observability to ensure audit trails."
+
+  - src: Logging_Vocabulary_Cheat_Sheet.md
+    description: "This article proposes a standardized vocabulary and JSON format for logging security events to simplify
+      monitoring and incident response. Use when reviewing logging architecture for uniformity."
+
+  - src: MCP_Security_Cheat_Sheet.md
+    description: "This guide provides best practices for securing the Model Context Protocol (MCP) to minimize attack
+      surfaces between AI clients, servers, and tools. Use when reviewing MCP architectures."
+
+  - src: Mass_Assignment_Cheat_Sheet.md
+    description: "This cheat sheet explains Mass Assignment vulnerabilities where attackers bind unauthorized request
+      parameters to internal variables. Use when reviewing backend object mapping logic to control modification."
+
+  - src: Microservices_Security_Cheat_Sheet.md
+    description: "This document identifies architecture patterns for implementing robust authentication and authorization
+      within distributed microservice ecosystems. Use when reviewing cloud-native architectures."
+
+  - src: Microservices_based_Security_Arch_Doc_Cheat_Sheet.md
+    description: "This guide proposes a methodology for collecting essential security-specific architectural information in
+      microservice environments. Use when reviewing backend systems to accurately map flows."
+
+  - src: Mobile_Application_Security_Cheat_Sheet.md
+    description: "This cheat sheet provides a starting point for addressing the unique security challenges of mobile
+      application development. Use when reviewing frontend mobile clients to ensure local data is protected."
+
+  - src: Multi_Tenant_Security_Cheat_Sheet.md
+    description: "This guide outlines best practices for securing SaaS platforms to prevent cross-tenant data leakage and
+      resource contention. Use when reviewing backend logic to ensure strict tenant context management."
+
+  - src: Multifactor_Authentication_Cheat_Sheet.md
+    description: "This document provides guidance on implementing Multi-Factor Authentication (MFA) to defend against
+      brute-force and credential stuffing attacks. Use when reviewing backend account security."
+
+  - src: NPM_Security_Cheat_Sheet.md
+    description: "This cheat sheet covers best practices for JavaScript developers to secure their NPM usage and prevent
+      secret leakage. Use when reviewing frontend/backend dependency management to safely publish packages."
+
+  - src: Network_Segmentation_Cheat_Sheet.md
+    description: "This guide details the basics of using network segmentation as a core component of defense-in-depth to
+      isolate services. Use when reviewing infrastructure perimeters to limit lateral movement."
+
+  - src: NoSQL_Security_Cheat_Sheet.md
+    description: "This cheat sheet summarizes guidance to reduce security risks unique to NoSQL databases, such as flexible
+      schemas and complex query models. Use when reviewing data stores to prevent injection."
+
+  - src: NodeJS_Docker_Cheat_Sheet.md
+    description: "This document provides guidelines for building optimized and secure Docker images specifically for Node.js
+      applications. Use when reviewing Node.js containers to ensure minimal attack surfaces."
+
+  - src: Nodejs_Security_Cheat_Sheet.md
+    description: "This comprehensive cheat sheet lists actionable best practices for developing secure Node.js applications,
+      covering error handling and server security. Use when reviewing Node.js backend."
+
+  - src: OAuth2_Cheat_Sheet.md
+    description: "This guide describes current security best practices for implementing the OAuth 2.0 authorization protocol
+      to protect APIs. Use when reviewing backend delegated access systems to handle tokens."
+
+  - src: OS_Command_Injection_Defense_Cheat_Sheet.md
+    description: "This cheat sheet provides primary defenses for preventing Command Injection vulnerabilities by avoiding
+      direct OS calls and utilizing parameterized APIs. Use when reviewing backend logic."
+
+  - src: PHP_Configuration_Cheat_Sheet.md
+    description: "This article details proper security settings for the PHP initialization file and configurations for
+      popular web servers running PHP. Use when reviewing infrastructure deployment to disable functions."
+    skip: true
+
+  - src: Password_Storage_Cheat_Sheet.md
+    description: "This essential guide advises on the proper cryptographic methods for hashing and salting passwords to
+      protect them against offline attacks. Use when reviewing backend authentication systems."
+
+  - src: Pinning_Cheat_Sheet.md
+    description: "This technical guide explains the implementation and severe risks associated with Certificate and Public
+      Key Pinning. Use when reviewing frontend mobile clients to secure highly hostile communication."
+
+  - src: Prototype_Pollution_Prevention_Cheat_Sheet.md
+    description: "This cheat sheet explains Prototype Pollution in JavaScript and provides protection mechanisms like using
+      Maps or freezing prototypes. Use when reviewing frontend/backend logic to safely merge JSON."
+
+  - src: Query_Parameterization_Cheat_Sheet.md
+    description: "This document provides language-specific code examples demonstrating how to build parameterized queries to
+      definitively prevent SQL Injection. Use when reviewing backend database interactions."
+
+  - src: REST_Assessment_Cheat_Sheet.md
+    description: "This brief guide highlights the challenges of security testing RESTful web services due to their
+      non-standard parameter specifications. Use when reviewing backend REST APIs."
+
+  - src: REST_Security_Cheat_Sheet.md
+    description: "This comprehensive cheat sheet provides high-level security guidelines for designing and protecting
+      RESTful web services. Use when reviewing backend REST APIs to enforce transport confidentiality."
+
+  - src: Ruby_on_Rails_Cheat_Sheet.md
+    description: "This guide provides basic security tips for Ruby on Rails developers to augment the official framework
+      documentation. Use when reviewing backend Rails applications to avoid common pitfalls."
+    skip: true
+
+  - src: SAML_Security_Cheat_Sheet.md
+    description: "This document details security configurations for the Security Assertion Markup Language (SAML),
+      specifically the Web Browser SSO Profile. Use when reviewing backend federated identity."
+
+  - src: SQL_Injection_Prevention_Cheat_Sheet.md
+    description: "This guide defines SQL injection vulnerabilities and provides practical, code-level defenses such as
+      parameterized queries and allow-list validation. Use when reviewing backend database logic."
+
+  - src: Secrets_Management_Cheat_Sheet.md
+    description: "This cheat sheet offers best practices for centralizing, automating, and controlling access to sensitive
+      credentials like API keys. Use when reviewing infrastructure deployment pipelines."
+
+  - src: Secure_AI_Model_Ops_Cheat_Sheet.md
+    description: "This practical guide covers security practices for operating and deploying AI/ML systems, addressing
+      threats from data poisoning to model theft. Use when reviewing backend MLOps pipelines."
+
+  - src: Secure_Cloud_Architecture_Cheat_Sheet.md
+    description: "This cheat sheet discusses essential security patterns for enterprise cloud architectures, covering IAM
+      policies and secure object storage. Use when reviewing infrastructure deployments."
+
+  - src: Secure_Code_Review_Cheat_Sheet.md
+    description: "This guide outlines methodologies for conducting manual security code reviews to identify vulnerabilities
+      that automated tools miss. Use when reviewing frontend/backend codebases."
+
+  - src: Secure_Product_Design_Cheat_Sheet.md
+    description: "This document outlines fundamental security principles, such as least privilege and secure defaults, to
+      incorporate during product inception. Use when reviewing architecture to ensure security."
+
+  - src: Securing_Cascading_Style_Sheets_Cheat_Sheet.md
+    description: "This cheat sheet informs developers about the security implications of CSS authoring, particularly
+      regarding data exposure and unauthorized UI manipulation. Use when reviewing frontend styling."
+
+  - src: Server_Side_Request_Forgery_Prevention_Cheat_Sheet.md
+    description: "This extensive guide provides defensive strategies to prevent SSRF attacks when applications handle
+      untrusted URLs or perform internal network requests. Use when reviewing backend request logic."
+
+  - src: Serverless_FaaS_Security_Cheat_Sheet.md
+    description: "This document details the unique security challenges of Serverless and Function as a Service (FaaS)
+      environments, emphasizing least privilege. Use when reviewing infrastructure cloud-native functions to prevent
+      over-permissioning and context leakage."
+
+  - src: Session_Management_Cheat_Sheet.md
+    description: "This comprehensive cheat sheet details the secure generation, transmission, and lifecycle management of
+      web session identifiers. Use when reviewing backend authentication systems to protect against session hijacking
+      and ensure strict cookie attributes."
+
+  - src: Software_Supply_Chain_Security_Cheat_Sheet.md
+    description: "This article provides an overview of the Software Supply Chain threat landscape and best practices for
+      mitigating risks. Use when reviewing infrastructure build processes to verify artifact integrity."
+
+  - src: Symfony_Cheat_Sheet.md
+    description: "This guide highlights security tips and built-in protections for developers building applications using
+      the PHP Symfony framework. Use when reviewing backend PHP logic to properly configure CSRF."
+    skip: true
+
+  - src: TLS_Cipher_String_Cheat_Sheet.md
+    description: "This cheat sheet provides technical guidance on configuring strong TLS cipher strings to secure network
+      transport layers. Use when reviewing infrastructure web servers to prioritize modern suites."
+
+  - src: Third_Party_Javascript_Management_Cheat_Sheet.md
+    description: "This document details the severe risks of incorporating third-party JavaScript tags and strategies to
+      maintain control. Use when reviewing frontend analytics to apply Subresource Integrity (SRI)."
+
+  - src: Third_Party_Payment_Gateway_Integration_Cheat_Sheet.md
+    description: "This cheat sheet outlines secure practices for integrating external payment processors to prevent payment
+      spoofing and fraud. Use when reviewing backend e-commerce functionality to ensure authentication."
+
+  - src: Threat_Modeling_Cheat_Sheet.md
+    description: "This foundational guide introduces structured processes for anticipating what can go wrong in a system and
+      mitigating risks early. Use when reviewing components to systematically map architectures."
+
+  - src: Transaction_Authorization_Cheat_Sheet.md
+    description: "This document discusses functional guidelines for securing high-risk transaction authorizations,
+      specifically protecting the confirmation of significant data. Use when reviewing financial workflows."
+
+  - src: Transport_Layer_Protection_Cheat_Sheet.md
+    description: "This article provides high-level concepts and deployment recommendations for utilizing Transport Layer
+      Security (TLS) across web applications. Use when reviewing infrastructure network postures."
+
+  - src: Transport_Layer_Security_Cheat_Sheet.md
+    description: "This technical guide provides specific configuration advice for implementing strong TLS, including
+      protocol selection and cipher suite restrictions. Use when reviewing infrastructure configurations."
+
+  - src: Unvalidated_Redirects_and_Forwards_Cheat_Sheet.md
+    description: "This cheat sheet explains how unvalidated redirects can facilitate phishing and how forwards can bypass
+      access controls. Use when reviewing routing logic to apply strict destination validation."
+
+  - src: User_Privacy_Protection_Cheat_Sheet.md
+    description: "This guide introduces methods to protect user privacy and anonymity against aggressive online tracking and
+      data exposure. Use when reviewing platforms handling sensitive user data."
+
+  - src: Virtual_Patching_Cheat_Sheet.md
+    description: "This document presents a framework for using intermediary security layers, like WAFs, to mitigate known
+      vulnerabilities quickly. Use when reviewing infrastructure strategies to block exploit attempts."
+
+  - src: Vulnerability_Disclosure_Cheat_Sheet.md
+    description: "This cheat sheet outlines the ethical and procedural best practices for establishing and managing a
+      corporate vulnerability disclosure program. Use when reviewing infrastructure and policies."
+
+  - src: Vulnerable_Dependency_Management_Cheat_Sheet.md
+    description: "This guide provides approaches for handling the discovery and remediation of vulnerable third-party
+      components within a project. Use when reviewing CI/CD environments to automate the detection of libraries."
+
+  - src: Web_Service_Security_Cheat_Sheet.md
+    description: "This article focuses on providing high-level guidance for securing machine-to-machine web services against
+      eavesdropping and unauthorized access. Use when reviewing backend web service architectures."
+
+  - src: WebSocket_Security_Cheat_Sheet.md
+    description: "This document highlights the unique risks associated with WebSockets, including Cross-Site WebSocket
+      Hijacking (CSWSH), and provides mitigation strategies. Use when reviewing bidirectional communication."
+
+  - src: XML_External_Entity_Prevention_Cheat_Sheet.md
+    description: "This critical guide provides language-specific configurations for disabling Document Type Definitions
+      (DTDs) and external entities in XML parsers. Use when reviewing backend services that process untrusted XML."
+
+  - src: XML_Security_Cheat_Sheet.md
+    description: "This resource provides guidelines for safely parsing and validating XML documents to prevent
+      vulnerabilities such as schema poisoning and denial of service. Use when reviewing backend applications."
+
+  - src: XSS_Filter_Evasion_Cheat_Sheet.md
+    description: "This reference document provides a series of advanced XSS payloads designed to bypass poorly implemented
+      input filters and WAFs. Use when reviewing sanitization logic or firewalls to understand execution contexts."
+
+  - src: XS_Leaks_Cheat_Sheet.md
+    description: "This article details the mechanics of Cross-site leaks (XS Leaks) and provides defensive strategies using
+      modern browser security features. Use when reviewing frontend web security to prevent attacks."
+
+  - src: Zero_Trust_Architecture_Cheat_Sheet.md
+    description: "This guide outlines the core principles and practical implementation steps for establishing a Zero Trust
+      Architecture where no implicit trust is granted based on network location. Use when reviewing infrastructure
+      identity and access management structures."
+
+  - src: gRPC_Security_Cheat_Sheet.md
+    description: "This cheatsheet provides essential security controls and best practices for protecting gRPC services,
+      including transport security, authentication, and input validation. Use when reviewing backend architectures to
+      ensure secure communication."

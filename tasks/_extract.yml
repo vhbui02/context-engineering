@@ -1,0 +1,51 @@
+---
+- ansible.builtin.set_fact:
+    _name: "{{ _name | default(repo_url | basename | replace('.git', '')) }}"
+
+- name: Extract repository
+  block:
+    - name: Clone repository
+      ansible.builtin.git:
+        repo: "{{ repo_url }}"
+        dest: "/tmp/{{ _name }}"
+        depth: 1
+        single_branch: true
+        accept_hostkey: yes
+        #update: yes
+      check_mode: false # CAUTION: rsync need dest directory
+
+    - name: Synchronize files from cloned repository
+      ansible.posix.synchronize:
+        src: "/tmp/{{ _name }}/{{ item.src }}"
+        dest: "{{ playbook_dir }}/build/{{ _name }}/{{ item.dest }}"
+        archive: true
+        delete: false
+        rsync_opts: "{{ ['-m', '--delete-during', '--delete-excluded', '--mkpath'] + item.opts }}"
+      loop: "{{ rsync_steps }}"
+
+    - name: Generate Markdown file for LLM
+      ansible.builtin.command:
+        cmd: >-
+          files-to-prompt {{ playbook_dir }}/build/{{ _name }}/ 
+            -m
+            -o {{ playbook_dir }}/build/{{ ansible_date_time.date }}-{{ _name }}.md
+
+    - name: Find outdated Markdown files
+      ansible.builtin.find:
+        paths: "{{ playbook_dir }}/build/"
+        patterns: "*-{{ _name }}.md"
+        excludes: "{{ ansible_date_time.date }}-{{ _name }}.md"
+      register: _extract_old_markdown_files
+
+    - name: Remove outdated Markdown files
+      ansible.builtin.file:
+        path: "{{ item.path }}"
+        state: absent
+      loop: "{{ _extract_old_markdown_files.files }}"
+
+  always:
+    - name: Clean up temp directory
+      ansible.builtin.file:
+        path: "/tmp/{{ _name }}"
+        state: absent
+      check_mode: false

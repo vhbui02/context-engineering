@@ -1,0 +1,15 @@
+---
+- name: Extract TanStack Query documentation
+  ansible.builtin.include_tasks: _extract.yml
+  vars:
+    _name: tanstack-query
+    repo_url: git@github.com:TanStack/query.git
+    rsync_steps:
+      - src: docs/
+        dest: docs/
+        opts:
+          - "--include=/framework/react"
+          - "--exclude=/framework/*"
+          - "--include=*/"
+          - "--include=*.md"
+          - "--exclude=*"

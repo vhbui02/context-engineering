@@ -1,0 +1,14 @@
+---
+- name: Extract shadcn/ui documentation
+  ansible.builtin.include_tasks: _extract.yml
+  vars:
+    _name: shadcn
+    repo_url: git@github.com:shadcn-ui/ui.git
+    rsync_steps:
+      - src: apps/v4/content/docs/
+        dest: docs/
+        opts:
+          - "--exclude=/changelog"
+          - "--include=*/"
+          - "--include=*.mdx"
+          - "--exclude=*"

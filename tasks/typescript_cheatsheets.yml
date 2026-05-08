@@ -1,0 +1,13 @@
+---
+- name: Extract TypeScript Cheatsheets documentation
+  ansible.builtin.include_tasks: _extract.yml
+  vars:
+    _name: typescript-cheatsheets-react
+    repo_url: git@github.com:typescript-cheatsheets/react.git
+    rsync_steps:
+      - src: docs/
+        dest: docs/
+        opts:
+          - "--include=*/"
+          - "--include=*.md"
+          - "--exclude=*"

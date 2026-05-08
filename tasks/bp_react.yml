@@ -1,0 +1,22 @@
+---
+- name: Extract Bulletproof React documentation
+  ansible.builtin.include_tasks: _extract.yml
+  vars:
+    repo_url: git@github.com:alan2207/bulletproof-react.git
+    rsync_steps:
+      - src: docs/
+        dest: docs/
+        opts:
+          - "--exclude=assets"
+          - "--include=*/"
+          - "--include=*.md"
+          - "--exclude=*"
+      - src: apps/react-vite/
+        dest: apps/react-vite/
+        opts:
+          - "--include=*/"
+          - "--include=*.js"
+          - "--include=*.jsx"
+          - "--include=*.ts"
+          - "--include=*.tsx"
+          - "--exclude=*"
