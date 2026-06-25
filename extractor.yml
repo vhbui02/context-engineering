@@ -5,65 +5,22 @@
   gather_facts: true
 
   tasks:
-    - import_tasks: tasks/ansible.yml # tested
-      tags: ansible
+    - name: Extract documentation from configured repositories
+      when: ansible_run_tags | intersect([config.tag]) | length > 0 or 'all' in ansible_run_tags # handle per-item selection
+      ansible.builtin.include_tasks:
+        file: tasks/_extract.yml
+        apply:
+          tags: always # ensure after config matching, tasks within _extract.yml is also running
+      vars:
+        repo_name: "{{ config.repo_name }}"
+        repo_url: "{{ config.repo_url }}"
+        rsync_steps: "{{ config.rsync_steps }}"
+      loop: "{{ extractor_configs }}"
+      loop_control:
+        loop_var: "config"
+        label: "{{ config.repo_name }}"
+      tags: always
 
-    - import_tasks: tasks/bp_react.yml # tested
-      tags: bp_react
-
-    - import_tasks: tasks/jinja2.yml # tested
-      tags: jinja2
-
-    - import_tasks: tasks/msgspec.yml # tested
-      tags: msgspec
-
-    - import_tasks: tasks/owasp_cheatsheet.yml # tested
-      tags: owasp-cheatsheet
-
-    - import_tasks: tasks/playwright.yml # tested
-      tags: playwright
-
-    - import_tasks: tasks/pydantic.yml # tested
-      tags: pydantic
-
-    - import_tasks: tasks/pytest.yml # tested
-      tags: pytest
-
-    - import_tasks: tasks/python_di.yml # tested
-      tags: python_di
-
-    - import_tasks: tasks/python_guide.yml # tested
-      tags: python_guide
-
-    - import_tasks: tasks/react_testing_library.yml # tested
-      tags: react_testing_library
-
-    - import_tasks: tasks/rclone.yml # tested
-      tags: rclone
-
-    - import_tasks: tasks/restic.yml # tested
-      tags: restic
-
-    - import_tasks: tasks/shadcn.yml # tested
-      tags: shadcn
-
-    - import_tasks: tasks/sqlalchemy.yml # tested
-      tags: sqlalchemy
-
-    - import_tasks: tasks/tanstack_form.yml # tested
-      tags: tanstack_form
-
-    - import_tasks: tasks/tanstack_query.yml # tested
-      tags: tanstack_query
-
-    - import_tasks: tasks/tanstack_router.yml # tested
-      tags: tanstack_router
-
-    - import_tasks: tasks/typescript_cheatsheets.yml # tested
-      tags: typescript_cheatsheets
-
-    - import_tasks: tasks/vagrant.yml # tested
+    # Exceptions: this task required dynamic GitHub tag fetch
+    - import_tasks: tasks/vagrant.yml
       tags: vagrant
-
-    - import_tasks: tasks/vitest.yml # tested
-      tags: vitest

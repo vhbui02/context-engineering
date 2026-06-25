@@ -1,23 +1,32 @@
 ---
-- ansible.builtin.set_fact:
-    _name: "{{ _name | default(repo_url | basename | replace('.git', '')) }}"
+- name: Validate required extraction variables
+  ansible.builtin.assert:
+    that:
+      - repo_name is defined
+      - repo_name | trim | length > 0
+      - repo_url is defined
+      - repo_url | trim | length > 0
+      - rsync_steps is iterable
+      - rsync_steps is not mapping
+      - rsync_steps | length > 0
+    fail_msg: "'repo_name', 'repo_url', and 'rsync_steps' must be defined when including '_extract.yml'"
 
 - name: Extract repository
   block:
     - name: Clone repository
       ansible.builtin.git:
         repo: "{{ repo_url }}"
-        dest: "/tmp/{{ _name }}"
+        dest: "/tmp/{{ repo_name }}"
         depth: 1
         single_branch: true
-        accept_hostkey: yes
+        accept_hostkey: true
         #update: yes
       check_mode: false # CAUTION: rsync need dest directory
 
     - name: Synchronize files from cloned repository
       ansible.posix.synchronize:
-        src: "/tmp/{{ _name }}/{{ item.src }}"
-        dest: "{{ playbook_dir }}/build/{{ _name }}/{{ item.dest }}"
+        src: "/tmp/{{ repo_name }}/{{ item.src }}"
+        dest: "{{ playbook_dir }}/build/{{ repo_name }}/{{ item.dest }}"
         archive: true
         delete: false
         rsync_opts: "{{ ['-m', '--delete-during', '--delete-excluded', '--mkpath'] + item.opts }}"
@@ -26,15 +35,15 @@
     - name: Generate Markdown file for LLM
       ansible.builtin.command:
         cmd: >-
-          files-to-prompt {{ playbook_dir }}/build/{{ _name }}/ 
+          files-to-prompt {{ playbook_dir }}/build/{{ repo_name }}/
             -m
-            -o {{ playbook_dir }}/build/{{ ansible_date_time.date }}-{{ _name }}.md
+            -o {{ playbook_dir }}/build/{{ ansible_date_time.date }}-{{ repo_name }}.md
 
     - name: Find outdated Markdown files
       ansible.builtin.find:
         paths: "{{ playbook_dir }}/build/"
-        patterns: "*-{{ _name }}.md"
-        excludes: "{{ ansible_date_time.date }}-{{ _name }}.md"
+        patterns: "*-{{ repo_name }}.md"
+        excludes: "{{ ansible_date_time.date }}-{{ repo_name }}.md"
       register: _extract_old_markdown_files
 
     - name: Remove outdated Markdown files
@@ -46,6 +55,7 @@
   always:
     - name: Clean up temp directory
       ansible.builtin.file:
-        path: "/tmp/{{ _name }}"
+        path: "/tmp/{{ repo_name }}"
         state: absent
       check_mode: false
+      diff: false

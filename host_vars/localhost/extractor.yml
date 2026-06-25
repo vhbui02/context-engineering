@@ -1,0 +1,328 @@
+---
+extractor_configs:
+  - repo_name: ansible
+    repo_url: git@github.com:ansible/ansible.git
+    rsync_steps:
+      - src: docs/docsite/rst/
+        dest: docs/
+        opts:
+          - "--exclude=_themes"
+          - "--include=*/"
+          - "--include=*.rst"
+          - "--exclude=*"
+    tag: ansible
+
+  - repo_name: bp-react
+    repo_url: git@github.com:alan2207/bulletproof-react.git
+    rsync_steps:
+      - src: docs/
+        dest: docs/
+        opts:
+          - "--include=*/"
+          - "--include=*.md"
+          - "--exclude=*"
+      - src: src/
+        dest: src/
+        opts:
+          - "--include=*/"
+          - "--include=*.ts"
+          - "--include=*.tsx"
+          - "--exclude=*"
+    tag: bp_react
+
+  - repo_name: jinja2
+    repo_url: git@github.com:pallets/jinja.git
+    rsync_steps:
+      - src: docs/
+        dest: docs/
+        opts:
+          - "--exclude=/_static"
+          - "--include=*/"
+          - "--include=*.rst"
+          - "--exclude=*"
+    tag: jinja2
+
+  - repo_name: mediamtx
+    repo_url: git@github.com:bluenviron/mediamtx.git
+    rsync_steps:
+      - src: docs/
+        dest: docs/
+        opts:
+          - "--include=*/"
+          - "--include=*.md"
+          - "--exclude=*"
+    tag: mediamtx
+
+  - repo_name: msgspec
+    repo_url: git@github.com:jcrist/msgspec.git
+    rsync_steps:
+      - src: docs/
+        dest: docs/
+        opts:
+          - "--exclude=/_static"
+          - "--exclude=/_images"
+          - "--include=*/"
+          - "--include=*.rst"
+          - "--include=*.md"
+          - "--exclude=*"
+    tag: msgspec
+
+  - repo_name: nx
+    repo_url: git@github.com:nrwl/nx.git
+    rsync_steps:
+      - src: docs/
+        dest: docs/
+        opts:
+          - "--include=*/"
+          - "--include=*.md"
+          - "--exclude=*"
+    tag: nx
+
+  - repo_name: owasp-cheatsheet
+    repo_url: git@github.com:OWASP/CheatSheetSeries.git
+    rsync_steps:
+      - src: cheatsheets/
+        dest: cheatsheets/
+        opts:
+          - "--include=*/"
+          - "--include=*.md"
+          - "--exclude=*"
+    tag: owasp_cheatsheet
+
+  - repo_name: playwright
+    repo_url: git@github.com:microsoft/playwright.git
+    rsync_steps:
+      - src: docs/src/
+        dest: docs/
+        opts:
+          - "--include=*/"
+          - "--include=*.md"
+          - "--exclude=*"
+    tag: playwright
+
+  - repo_name: pydantic
+    repo_url: git@github.com:pydantic/pydantic.git
+    rsync_steps:
+      - src: docs/
+        dest: docs/
+        opts:
+          - "--include=*/"
+          - "--include=*.md"
+          - "--exclude=*"
+    tag: pydantic
+
+  - repo_name: pytest
+    repo_url: git@github.com:pytest-dev/pytest.git
+    rsync_steps:
+      - src: doc/en/
+        dest: docs/
+        opts:
+          - "--exclude=/_static"
+          - "--include=*/"
+          - "--include=*.rst"
+          - "--exclude=*"
+    tag: pytest
+
+  - repo_name: python-dependency-injector
+    repo_url: git@github.com:ets-labs/python-dependency-injector.git
+    rsync_steps:
+      - src: docs/
+        dest: docs/
+        opts:
+          - "--exclude=_static"
+          - "--exclude=/main/changelog.rst"
+          - "--include=*/"
+          - "--include=*.rst"
+          - "--exclude=*"
+      - src: examples/
+        dest: examples/
+        opts:
+          - "--include=*/"
+          - "--include=*.py"
+          - "--exclude=*"
+    tag: python_di
+
+  - repo_name: python-guide
+    repo_url: git@github.com:realpython/python-guide.git
+    rsync_steps:
+      - src: docs/
+        dest: docs/
+        opts:
+          - "--exclude=404.rst"
+          - "--include=*/"
+          - "--include=*.rst"
+          - "--exclude=*"
+    tag: python_guide
+
+  - repo_name: rclone
+    repo_url: git@github.com:rclone/rclone.git
+    rsync_steps:
+      - src: docs/content
+        dest: docs/content
+        opts:
+          - "--include=*/"
+          - "--include=*.md"
+          - "--exclude=*"
+    tag: rclone
+
+  - repo_name: testing-library-docs
+    repo_url: git@github.com:testing-library/testing-library-docs.git
+    rsync_steps:
+      - src: docs/
+        dest: docs/
+        opts:
+          - "--include=/react-testing-library"
+          - "--include=/react-native-testing-library"
+          - "--exclude=/*-testing-library"
+          - "--include=*/"
+          - "--include=*.md"
+          - "--include=*.mdx"
+          - "--exclude=*"
+    tag: react_testing_library
+
+  - repo_name: typebox
+    repo_url: git@github.com:sinclairzx81/typebox.git
+    rsync_steps:
+      - src: docs/docs/
+        dest: docs/
+        opts:
+          - "--include=*/"
+          - "--include=*.html"
+          - "--exclude=*"
+    tag: typebox
+
+  - repo_name: restic
+    repo_url: git@github.com:restic/restic.git
+    rsync_steps:
+      - src: doc/
+        dest: doc/
+        opts:
+          - "--include=*/"
+          - "--include=*.rst"
+          - "--exclude=*"
+    tag: restic
+
+  - repo_name: rust-the-book
+    repo_url: git@github.com:rust-lang/book.git
+    rsync_steps:
+      - src: src/
+        dest: src/
+        opts:
+          - "--include=*/"
+          - "--include=*.md"
+          - "--exclude=*"
+    tag: rust-the-book
+
+  - repo_name: shadcn
+    repo_url: git@github.com:shadcn-ui/ui.git
+    rsync_steps:
+      - src: apps/v4/content/docs/
+        dest: docs/
+        opts:
+          - "--exclude=/changelog"
+          - "--include=*/"
+          - "--include=*.mdx"
+          - "--exclude=*"
+    tag: shadcn
+
+  - repo_name: slsa
+    repo_url: git@github.com:slsa-framework/slsa.git
+    rsync_steps:
+      - src: spec/
+        dest: spec/
+        opts:
+          - "--exclude=/images"
+          - "--exclude=/schema"
+          - "--include=*/"
+          - "--include=*.md"
+          - "--exclude=*"
+    tag: slsa
+
+  - repo_name: sqlalchemy
+    repo_url: git@github.com:sqlalchemy/sqlalchemy.git
+    rsync_steps:
+      - src: doc/build/
+        dest: docs/
+        opts:
+          - "--exclude=/changelog"
+          - "--include=*/"
+          - "--include=*.rst"
+          - "--exclude=*"
+      - src: examples/
+        dest: examples/
+        opts:
+          - "--include=*/"
+          - "--include=*.py"
+          - "--exclude=*"
+    tag: sqlalchemy
+
+  - repo_name: tanstack-form
+    repo_url: git@github.com:TanStack/form.git
+    rsync_steps:
+      # No file-type filter -- intentional, copies all non-excluded files
+      - src: docs/
+        dest: docs/
+        opts:
+          - "--include=/framework/react"
+          - "--exclude=/framework/*"
+          - "--include=*/"
+          - "--include=*.md"
+          - "--exclude=*"
+    tag: tanstack_form
+
+  - repo_name: tanstack-query
+    repo_url: git@github.com:TanStack/query.git
+    rsync_steps:
+      - src: docs/
+        dest: docs/
+        opts:
+          - "--include=/framework/react"
+          - "--exclude=/framework/*"
+          - "--include=*/"
+          - "--include=*.md"
+          - "--exclude=*"
+    tag: tanstack_query
+
+  - repo_name: tanstack-router
+    repo_url: git@github.com:TanStack/router.git
+    rsync_steps:
+      - src: docs/router/
+        dest: docs/
+        opts:
+          - "--exclude=assets"
+          - "--include=*/"
+          - "--include=*.md"
+          - "--exclude=*"
+    tag: tanstack_router
+
+  - repo_name: typescript-cheatsheets-react
+    repo_url: git@github.com:typescript-cheatsheets/react.git
+    rsync_steps:
+      - src: docs/
+        dest: docs/
+        opts:
+          - "--include=*/"
+          - "--include=*.md"
+          - "--exclude=*"
+    tag: typescript_cheatsheets
+
+  - repo_name: vitest
+    repo_url: git@github.com:vitest-dev/vitest.git
+    rsync_steps:
+      - src: docs/
+        dest: docs/
+        opts:
+          - "--exclude=/.vitepress"
+          - "--include=*/"
+          - "--include=*.md"
+          - "--exclude=*"
+      - src: examples/
+        dest: examples/
+        opts:
+          - "--include=*/"
+          - "--include=*.js"
+          - "--include=*.jsx"
+          - "--include=*.ts"
+          - "--include=*.tsx"
+          - "--exclude=*"
+    tag: vitest
