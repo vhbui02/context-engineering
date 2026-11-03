@@ -1,7 +1,7 @@
 ---
 extractor_configs:
   - repo_name: ansible
-    repo_url: git@github.com:ansible/ansible.git
+    repo_url: https://github.com/ansible/ansible-documentation.git
     rsync_steps:
       - src: docs/docsite/rst/
         dest: docs/
@@ -12,8 +12,19 @@ extractor_configs:
           - "--exclude=*"
     tag: ansible
 
+  - repo_name: axios
+    repo_url: https://github.com/axios/axios.git
+    rsync_steps:
+      - src: docs/pages/
+        dest: docs/
+        opts:
+          - "--include=*/"
+          - "--include=*.md"
+          - "--exclude=*"
+    tag: axios
+
   - repo_name: bp-react
-    repo_url: git@github.com:alan2207/bulletproof-react.git
+    repo_url: https://github.com/alan2207/bulletproof-react.git
     rsync_steps:
       - src: docs/
         dest: docs/
@@ -21,7 +32,7 @@ extractor_configs:
           - "--include=*/"
           - "--include=*.md"
           - "--exclude=*"
-      - src: src/
+      - src: apps/react-vite/src/
         dest: src/
         opts:
           - "--include=*/"
@@ -30,8 +41,42 @@ extractor_configs:
           - "--exclude=*"
     tag: bp_react
 
+  - repo_name: coturn
+    repo_url: https://github.com/coturn/coturn.git
+    rsync_steps:
+      - src: docs/
+        dest: docs/
+        opts:
+          - "--include=*/"
+          - "--include=*.md"
+          - "--exclude=*"
+    tag: coturn
+
+  - repo_name: fish
+    repo_url: https://github.com/fish-shell/fish-shell.git
+    rsync_steps:
+      - src: doc_src/
+        dest: latest/docs/
+        opts:
+          - "--include=*/"
+          - "--include=*.rst"
+          - "--exclude=*"
+    tag: fish
+
+  - repo_name: fish
+    repo_url: https://github.com/fish-shell/fish-shell.git
+    repo_version: "3.3.1" # tag
+    rsync_steps:
+      - src: doc_src/
+        dest: v3.3.1/docs/
+        opts:
+          - "--include=*/"
+          - "--include=*.rst"
+          - "--exclude=*"
+    tag: fish-v3
+
   - repo_name: jinja2
-    repo_url: git@github.com:pallets/jinja.git
+    repo_url: https://github.com/pallets/jinja.git
     rsync_steps:
       - src: docs/
         dest: docs/
@@ -42,8 +87,19 @@ extractor_configs:
           - "--exclude=*"
     tag: jinja2
 
+  - repo_name: keycloak
+    repo_url: https://github.com/keycloak/keycloak.git
+    rsync_steps:
+      - src: docs/
+        dest: docs/
+        opts:
+          - "--include=*/"
+          - "--include=*.md"
+          - "--exclude=*"
+    tag: keycloak
+
   - repo_name: mediamtx
-    repo_url: git@github.com:bluenviron/mediamtx.git
+    repo_url: https://github.com/bluenviron/mediamtx.git
     rsync_steps:
       - src: docs/
         dest: docs/
@@ -54,7 +110,7 @@ extractor_configs:
     tag: mediamtx
 
   - repo_name: msgspec
-    repo_url: git@github.com:jcrist/msgspec.git
+    repo_url: https://github.com/jcrist/msgspec.git
     rsync_steps:
       - src: docs/
         dest: docs/
@@ -68,18 +124,19 @@ extractor_configs:
     tag: msgspec
 
   - repo_name: nx
-    repo_url: git@github.com:nrwl/nx.git
+    repo_url: https://github.com/nrwl/nx.git
     rsync_steps:
-      - src: docs/
+      - src: astro-docs/src/content/docs/
         dest: docs/
         opts:
           - "--include=*/"
-          - "--include=*.md"
+          - "--include=*.mdoc"
+          - "--include=*.mdx"
           - "--exclude=*"
     tag: nx
 
   - repo_name: owasp-cheatsheet
-    repo_url: git@github.com:OWASP/CheatSheetSeries.git
+    repo_url: https://github.com/OWASP/CheatSheetSeries.git
     rsync_steps:
       - src: cheatsheets/
         dest: cheatsheets/
@@ -90,7 +147,7 @@ extractor_configs:
     tag: owasp_cheatsheet
 
   - repo_name: playwright
-    repo_url: git@github.com:microsoft/playwright.git
+    repo_url: https://github.com/microsoft/playwright.git
     rsync_steps:
       - src: docs/src/
         dest: docs/
@@ -101,7 +158,7 @@ extractor_configs:
     tag: playwright
 
   - repo_name: pydantic
-    repo_url: git@github.com:pydantic/pydantic.git
+    repo_url: https://github.com/pydantic/pydantic.git
     rsync_steps:
       - src: docs/
         dest: docs/
@@ -112,7 +169,7 @@ extractor_configs:
     tag: pydantic
 
   - repo_name: pytest
-    repo_url: git@github.com:pytest-dev/pytest.git
+    repo_url: https://github.com/pytest-dev/pytest.git
     rsync_steps:
       - src: doc/en/
         dest: docs/
@@ -124,7 +181,7 @@ extractor_configs:
     tag: pytest
 
   - repo_name: python-dependency-injector
-    repo_url: git@github.com:ets-labs/python-dependency-injector.git
+    repo_url: https://github.com/ets-labs/python-dependency-injector.git
     rsync_steps:
       - src: docs/
         dest: docs/
@@ -143,7 +200,7 @@ extractor_configs:
     tag: python_di
 
   - repo_name: python-guide
-    repo_url: git@github.com:realpython/python-guide.git
+    repo_url: https://github.com/realpython/python-guide.git
     rsync_steps:
       - src: docs/
         dest: docs/
@@ -155,7 +212,7 @@ extractor_configs:
     tag: python_guide
 
   - repo_name: rclone
-    repo_url: git@github.com:rclone/rclone.git
+    repo_url: https://github.com/rclone/rclone.git
     rsync_steps:
       - src: docs/content
         dest: docs/content
@@ -165,8 +222,31 @@ extractor_configs:
           - "--exclude=*"
     tag: rclone
 
+  - repo_name: skills
+    repo_url: https://github.com/mattpocock/skills.git
+    rsync_steps:
+      - src: docs
+        dest: docs
+        opts:
+          - "--include=*/"
+          - "--include=*.md"
+          - "--exclude=*"
+      - src: skills/productivity
+        dest: skills
+        opts:
+          - "--include=*/"
+          - "--include=*.md"
+          - "--exclude=*"
+      - src: skills/engineering
+        dest: skills
+        opts:
+          - "--include=*/"
+          - "--include=*.md"
+          - "--exclude=*"
+    tag: skills
+
   - repo_name: testing-library-docs
-    repo_url: git@github.com:testing-library/testing-library-docs.git
+    repo_url: https://github.com/testing-library/testing-library-docs.git
     rsync_steps:
       - src: docs/
         dest: docs/
@@ -181,7 +261,7 @@ extractor_configs:
     tag: react_testing_library
 
   - repo_name: typebox
-    repo_url: git@github.com:sinclairzx81/typebox.git
+    repo_url: https://github.com/sinclairzx81/typebox.git
     rsync_steps:
       - src: docs/docs/
         dest: docs/
@@ -192,7 +272,7 @@ extractor_configs:
     tag: typebox
 
   - repo_name: restic
-    repo_url: git@github.com:restic/restic.git
+    repo_url: https://github.com/restic/restic.git
     rsync_steps:
       - src: doc/
         dest: doc/
@@ -203,7 +283,7 @@ extractor_configs:
     tag: restic
 
   - repo_name: rust-the-book
-    repo_url: git@github.com:rust-lang/book.git
+    repo_url: https://github.com/rust-lang/book.git
     rsync_steps:
       - src: src/
         dest: src/
@@ -214,7 +294,7 @@ extractor_configs:
     tag: rust-the-book
 
   - repo_name: shadcn
-    repo_url: git@github.com:shadcn-ui/ui.git
+    repo_url: https://github.com/shadcn-ui/ui.git
     rsync_steps:
       - src: apps/v4/content/docs/
         dest: docs/
@@ -226,7 +306,7 @@ extractor_configs:
     tag: shadcn
 
   - repo_name: slsa
-    repo_url: git@github.com:slsa-framework/slsa.git
+    repo_url: https://github.com/slsa-framework/slsa.git
     rsync_steps:
       - src: spec/
         dest: spec/
@@ -239,7 +319,7 @@ extractor_configs:
     tag: slsa
 
   - repo_name: sqlalchemy
-    repo_url: git@github.com:sqlalchemy/sqlalchemy.git
+    repo_url: https://github.com/sqlalchemy/sqlalchemy.git
     rsync_steps:
       - src: doc/build/
         dest: docs/
@@ -257,7 +337,7 @@ extractor_configs:
     tag: sqlalchemy
 
   - repo_name: tanstack-form
-    repo_url: git@github.com:TanStack/form.git
+    repo_url: https://github.com/TanStack/form.git
     rsync_steps:
       # No file-type filter -- intentional, copies all non-excluded files
       - src: docs/
@@ -271,7 +351,7 @@ extractor_configs:
     tag: tanstack_form
 
   - repo_name: tanstack-query
-    repo_url: git@github.com:TanStack/query.git
+    repo_url: https://github.com/TanStack/query.git
     rsync_steps:
       - src: docs/
         dest: docs/
@@ -284,7 +364,7 @@ extractor_configs:
     tag: tanstack_query
 
   - repo_name: tanstack-router
-    repo_url: git@github.com:TanStack/router.git
+    repo_url: https://github.com/TanStack/router.git
     rsync_steps:
       - src: docs/router/
         dest: docs/
@@ -296,7 +376,7 @@ extractor_configs:
     tag: tanstack_router
 
   - repo_name: typescript-cheatsheets-react
-    repo_url: git@github.com:typescript-cheatsheets/react.git
+    repo_url: https://github.com/typescript-cheatsheets/react.git
     rsync_steps:
       - src: docs/
         dest: docs/
@@ -307,7 +387,7 @@ extractor_configs:
     tag: typescript_cheatsheets
 
   - repo_name: vitest
-    repo_url: git@github.com:vitest-dev/vitest.git
+    repo_url: https://github.com/vitest-dev/vitest.git
     rsync_steps:
       - src: docs/
         dest: docs/

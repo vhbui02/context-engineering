@@ -3,6 +3,10 @@
   hosts: localhost
   connection: local # gather facts from the local machine and overwrite the remote node's facts
   gather_facts: true
+  environment:
+    http_proxy: "{{ http_proxy | default(omit, true) }}"
+    https_proxy: "{{ https_proxy | default(omit, true) }}"
+    no_proxy: "{{ no_proxy | default(omit, true) }}"
 
   tasks:
     - name: Extract documentation from configured repositories
@@ -13,6 +17,7 @@
           tags: always # ensure after config matching, tasks within _extract.yml is also running
       vars:
         repo_name: "{{ config.repo_name }}"
+        repo_version: "{{ config.repo_version | default(omit) }}"
         repo_url: "{{ config.repo_url }}"
         rsync_steps: "{{ config.rsync_steps }}"
       loop: "{{ extractor_configs }}"
@@ -22,5 +27,6 @@
       tags: always
 
     # Exceptions: this task required dynamic GitHub tag fetch
-    - import_tasks: tasks/vagrant.yml
+    - name: Extract documentation from Vagrant
+      ansible.builtin.import_tasks: tasks/vagrant.yml
       tags: vagrant

@@ -1,3 +1,7 @@
 .agents
 .tmp
 build
+.venv
+
+# sensitive credentials in workstation, DO NOT COMMIT
+host_vars/localhost/vars.yml

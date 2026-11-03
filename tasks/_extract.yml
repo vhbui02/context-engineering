@@ -2,48 +2,109 @@
 - name: Validate required extraction variables
   ansible.builtin.assert:
     that:
-      - repo_name is defined
-      - repo_name | trim | length > 0
-      - repo_url is defined
-      - repo_url | trim | length > 0
-      - rsync_steps is iterable
-      - rsync_steps is not mapping
-      - rsync_steps | length > 0
-    fail_msg: "'repo_name', 'repo_url', and 'rsync_steps' must be defined when including '_extract.yml'"
+      - repo_name is defined and repo_name | trim | length > 0
+      - repo_url is defined and repo_url | trim | length > 0
+      - not (repo_url is match('^(git@|ssh://)'))
+      - rsync_steps is iterable and rsync_steps is not mapping and rsync_steps | length > 0
+    fail_msg: "'repo_name', 'repo_url', and 'rsync_steps' must be defined and 'repo_url' must not use SSH"
 
 - name: Extract repository
   block:
-    - name: Clone repository
-      ansible.builtin.git:
-        repo: "{{ repo_url }}"
-        dest: "/tmp/{{ repo_name }}"
-        depth: 1
-        single_branch: true
-        accept_hostkey: true
-        #update: yes
-      check_mode: false # CAUTION: rsync need dest directory
+    - name: Define extraction paths
+      ansible.builtin.set_fact:
+        _extract_version: >-
+          {{ repo_version | trim
+             if (repo_version is defined and repo_version != omit and repo_version | trim | length > 0)
+             else '' }}
+        _extract_build_dir: "{{ playbook_dir }}/build/{{ repo_name }}-{{ ansible_date_time.date }}"
+        _extract_output_file: >-
+          {{ playbook_dir }}/build/{{ ansible_date_time.date }}-{{ repo_name }}-{{ _extract_version | default('latest', true) }}.md
+        _extract_sparse_paths: >-
+          {{ (sparse_paths | default(rsync_steps | map(attribute='src') | list))
+             | map('regex_replace', '/$', '') | list }}
+
+    - name: Create temporary clone directory
+      ansible.builtin.tempfile:
+        state: directory
+        prefix: "ansible-clone-{{ repo_name }}-"
+      register: _extract_repo_tmpdir
+      check_mode: false
+
+    - name: Create temporary markdown file
+      ansible.builtin.tempfile:
+        state: file
+        prefix: "ansible-llm-{{ repo_name }}-"
+        suffix: ".md"
+      register: _extract_output_tmp_file
+      check_mode: false
+
+    - name: Clone repository with sparse checkout
+      ansible.builtin.shell:
+        cmd: |
+          set -euo pipefail
+          repo_url={{ repo_url | quote }}
+          target_dir={{ _extract_repo_tmpdir.path | quote }}
+          version={{ _extract_version | quote }}
+
+          branch_args=()
+          if [ -n "$version" ] && [ "$version" != "HEAD" ]; then
+            branch_args=(--branch "$version")
+          fi
+
+          git clone --filter=blob:none --no-checkout --depth 1 "${branch_args[@]}" "$repo_url" "$target_dir"
+          cd "$target_dir"
+          git sparse-checkout set --cone {{ _extract_sparse_paths | map('quote') | join(' ') }}
+          git checkout
+      args:
+        executable: /bin/bash
+      changed_when: true
 
     - name: Synchronize files from cloned repository
       ansible.posix.synchronize:
-        src: "/tmp/{{ repo_name }}/{{ item.src }}"
-        dest: "{{ playbook_dir }}/build/{{ repo_name }}/{{ item.dest }}"
+        src: "{{ _extract_repo_tmpdir.path }}/{{ item.src }}"
+        dest: "{{ _extract_build_dir }}/{{ item.dest }}"
         archive: true
         delete: false
-        rsync_opts: "{{ ['-m', '--delete-during', '--delete-excluded', '--mkpath'] + item.opts }}"
+        rsync_opts: "{{ ['-m', '--delete-during', '--delete-excluded', '--mkpath'] + (item.opts | default([])) }}"
       loop: "{{ rsync_steps }}"
+      loop_control:
+        label: "{{ item.src }} -> {{ item.dest }}"
 
     - name: Generate Markdown file for LLM
-      ansible.builtin.command:
-        cmd: >-
-          files-to-prompt {{ playbook_dir }}/build/{{ repo_name }}/
-            -m
-            -o {{ playbook_dir }}/build/{{ ansible_date_time.date }}-{{ repo_name }}.md
+      ansible.builtin.shell:
+        cmd: |
+          set -euo pipefail
+          input_dir={{ _extract_build_dir | quote }}
+          output_file={{ _extract_output_tmp_file.path | quote }}
+
+          {
+            printf '# Repository: %s\n\n' {{ repo_name | quote }}
+            printf 'Source directory: `%s`\n\n' "$input_dir"
+
+            LC_ALL=C find "$input_dir" -type f -print | LC_ALL=C sort | while IFS= read -r file; do
+              rel_path=${file#"$input_dir"/}
+              printf '\n## File: `%s`\n\n' "$rel_path"
+              printf '````text\n'
+              cat "$file" || true
+              printf '\n````\n'
+            done
+          } > "$output_file"
+      args:
+        executable: /bin/bash
+      changed_when: true
+
+    - name: Publish generated Markdown file
+      ansible.builtin.copy:
+        src: "{{ _extract_output_tmp_file.path }}"
+        dest: "{{ _extract_output_file }}"
+        remote_src: true
+        mode: "0644"
 
     - name: Find outdated Markdown files
       ansible.builtin.find:
         paths: "{{ playbook_dir }}/build/"
-        patterns: "*-{{ repo_name }}.md"
-        excludes: "{{ ansible_date_time.date }}-{{ repo_name }}.md"
+        patterns: "*-{{ repo_name }}-*.md"
+        excludes: "{{ ansible_date_time.date }}-{{ repo_name }}-*.md"
       register: _extract_old_markdown_files
 
     - name: Remove outdated Markdown files
@@ -51,11 +112,38 @@
         path: "{{ item.path }}"
         state: absent
       loop: "{{ _extract_old_markdown_files.files }}"
+      loop_control:
+        label: "{{ item.path }}"
+
+    - name: Find outdated build directories
+      ansible.builtin.find:
+        paths: "{{ playbook_dir }}/build/"
+        file_type: directory
+        patterns: "{{ repo_name }}-*"
+        excludes: "{{ repo_name }}-{{ ansible_date_time.date }}"
+      register: _extract_old_build_dirs
+
+    - name: Remove outdated build directories
+      ansible.builtin.file:
+        path: "{{ item.path }}"
+        state: absent
+      loop: "{{ _extract_old_build_dirs.files }}"
+      loop_control:
+        label: "{{ item.path }}"
 
   always:
-    - name: Clean up temp directory
+    - name: Clean up temporary Markdown file
       ansible.builtin.file:
-        path: "/tmp/{{ repo_name }}"
+        path: "{{ _extract_output_tmp_file.path }}"
         state: absent
+      when: _extract_output_tmp_file.path is defined
       check_mode: false
-      diff: false
+      changed_when: false
+
+    - name: Clean up temporary clone directory
+      ansible.builtin.file:
+        path: "{{ _extract_repo_tmpdir.path }}"
+        state: absent
+      when: _extract_repo_tmpdir.path is defined
+      check_mode: false
+      changed_when: false
